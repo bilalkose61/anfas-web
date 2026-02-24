@@ -1,0 +1,11 @@
+{
+  "HomePage": {
+    "title": "Anfaş Fuar Merkezi",
+    "description": "Dünya standartlarında etkinliklerin buluşma noktası.",
+    "viewEvents": "Fuarları Gör"
+  },
+  "Navigation": {
+    "events": "Fuarlar",
+    "contact": "İletişim"
+  }
+}

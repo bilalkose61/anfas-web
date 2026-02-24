@@ -1,0 +1,11 @@
+{
+  "HomePage": {
+    "title": "Anfas Expo Center",
+    "description": "The meeting point of world-class events.",
+    "viewEvents": "View Events"
+  },
+  "Navigation": {
+    "events": "Exhibitions",
+    "contact": "Contact"
+  }
+}

@@ -1,0 +1,245 @@
+// prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Event {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  titleTr     String
+  titleEn     String
+  contentTr   String   @db.Text
+  contentEn   String   @db.Text
+  categoryTr  String   @default("GENEL")
+  categoryEn  String   @default("GENERAL")
+  startDate   DateTime
+  endDate     DateTime
+  location    String   @default("Anfaş Expo Center")
+  logoUrl     String?
+  image       String?
+  isPublished Boolean  @default(false)
+  isFeatured  Boolean  @default(false)
+  tickets       Ticket[]
+  gallery       GalleryImage[]
+  announcements Announcement[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("events")
+}
+
+model Ticket {
+  id              String    @id @default(cuid())
+  eventId         String
+  event           Event     @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  customerName    String
+  customerEmail   String
+  customerPhone   String?
+  customerCompany String?
+  qrCode          String    @unique
+  isPaid          Boolean   @default(false)
+  paymentId       String?
+  isUsed          Boolean   @default(false)
+  usedAt          DateTime?
+  createdAt       DateTime  @default(now())
+
+  @@map("tickets")
+}
+
+model GalleryImage {
+  id        String   @id @default(cuid())
+  url       String
+  altTr     String?
+  altEn     String?
+  order     Int      @default(0)
+  eventId   String
+  event     Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@map("gallery_images")
+}
+
+model Announcement {
+  id          String   @id @default(cuid())
+  titleTr     String
+  titleEn     String
+  bodyTr      String   @db.Text
+  bodyEn      String   @db.Text
+  isPublished Boolean  @default(false)
+  eventId     String?
+  event       Event?   @relation(fields: [eventId], references: [id], onDelete: SetNull)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("announcements")
+}
+
+model Sponsor {
+  id        String      @id @default(cuid())
+  nameTr    String
+  nameEn    String
+  logoUrl   String?
+  website   String?
+  tier      SponsorTier @default(STANDARD)
+  isActive  Boolean     @default(true)
+  createdAt DateTime    @default(now())
+
+  @@map("sponsors")
+}
+
+model Video {
+  id          String   @id @default(cuid())
+  titleTr     String
+  titleEn     String
+  youtubeId   String
+  isPublished Boolean  @default(false)
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+
+  @@map("videos")
+}
+
+enum SponsorTier {
+  PLATINUM
+  GOLD
+  SILVER
+  STANDARD
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String?
+  role      UserRole @default(EDITOR)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("users")
+}
+
+model TeamMember {
+  id          String   @id @default(cuid())
+  nameTr      String
+  nameEn      String
+  titleTr     String
+  titleEn     String
+  photo       String?
+  order       Int      @default(0)
+  isPublished Boolean  @default(false)
+  createdAt   DateTime @default(now())
+
+  @@map("team_members")
+}
+
+model Photo {
+  id          String   @id @default(cuid())
+  titleTr     String
+  titleEn     String
+  url         String
+  isPublished Boolean  @default(false)
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+
+  @@map("photos")
+}
+
+model PressNews {
+  id          String   @id @default(cuid())
+  titleTr     String
+  titleEn     String
+  sourceTr    String
+  sourceEn    String
+  url         String?
+  imageUrl    String?
+  isPublished Boolean  @default(false)
+  publishedAt DateTime @default(now())
+  createdAt   DateTime @default(now())
+
+  @@map("press_news")
+}
+
+model ContactMessage {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  phone     String?
+  subject   String?
+  message   String   @db.Text
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@map("contact_messages")
+}
+
+model CalendarEvent {
+  id          String   @id @default(cuid())
+  titleTr     String
+  titleEn     String
+  descTr      String?
+  descEn      String?
+  startDate   DateTime
+  endDate     DateTime
+  location    String?
+  imageUrl    String?
+  isPublished Boolean  @default(false)
+  createdAt   DateTime @default(now())
+
+  @@map("calendar_events")
+}
+
+
+model Fair {
+  id           String   @id @default(cuid())
+  titleTr      String
+  titleEn      String
+  descTr       String?
+  descEn       String?
+  organizerTr  String?
+  organizerEn  String?
+  startDate    DateTime
+  endDate      DateTime
+  startTime    String?
+  endTime      String?
+  location     String?
+  website      String?
+  email        String?
+  logoUrl      String?
+  coverUrl     String?    // ← EKLE
+  slug         String   @unique
+  isPublished  Boolean  @default(false)
+  createdAt    DateTime @default(now())
+
+  @@map("fairs")
+}
+
+model Invitation {
+  id          String   @id @default(cuid())
+  uuid        String   @unique @default(uuid())
+  fairId      String
+  firstName   String
+  lastName    String
+  email       String
+  phone       String
+  company     String?
+  jobTitle    String?
+  city        String?
+  gender      String
+  kvkk        Boolean
+  consent     Boolean
+  createdAt   DateTime @default(now())
+
+  @@map("invitations")
+}
+
+enum UserRole {
+  SUPER_ADMIN
+  ADMIN
+  EDITOR
+}
