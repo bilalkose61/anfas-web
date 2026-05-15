@@ -2,7 +2,7 @@
 import { Calendar, Bell } from "lucide-react";
 
 type Props = {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 };
 
 export default async function AnnouncementsPage({ params }: Props) {

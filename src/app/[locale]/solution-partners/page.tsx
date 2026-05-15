@@ -1,7 +1,7 @@
 import PartnerLogo from "@/components/PartnerLogo";
 
 type Props = {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 };
 
 const partners = [

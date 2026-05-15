@@ -2,7 +2,7 @@ import { getInvitationByUuid } from "@/lib/actions/invitationActions";
 import { notFound } from "next/navigation";
 import { CheckCircle2, XCircle } from "lucide-react";
 
-type Props = { params: { locale: string; uuid: string } };
+type Props = { params: Promise<{ locale: string; uuid: string }> };
 
 const MONTHS_TR = ["Ocak","Şubat","Mart","Nisan","Mayıs","Haziran","Temmuz","Ağustos","Eylül","Ekim","Kasım","Aralık"];
 

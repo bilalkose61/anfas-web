@@ -1,7 +1,7 @@
 import { Calendar, ArrowRight, Building2, Users, ArrowUpRight, Award, MapPin, Phone, Mail, Globe2, Headphones } from "lucide-react";
 import Link from 'next/link';
 
-export default async function HomePage({ params }: { params: { locale: string } }) {
+export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const tr = locale === 'tr';
 

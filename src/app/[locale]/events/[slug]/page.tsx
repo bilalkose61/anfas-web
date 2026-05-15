@@ -3,7 +3,7 @@ import { ArrowLeft, Calendar, MapPin, ExternalLink, ArrowUpRight } from "lucide-
 import Link from "next/link";
 
 type Props = {
-  params: { locale: string; slug: string };
+  params: Promise<{ locale: string; slug: string }>;
 };
 
 const events: Record<string, {
