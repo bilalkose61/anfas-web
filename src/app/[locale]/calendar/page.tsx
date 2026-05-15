@@ -2,7 +2,7 @@ import { getPublishedFairs } from "@/lib/actions/fairActions";
 import Link from "next/link";
 import { Calendar } from "lucide-react";
 
-type Props = { params: { locale: string } };
+type Props = { params: Promise<{ locale: string }> };
 
 const MONTHS_TR = ["Ocak","Şubat","Mart","Nisan","Mayıs","Haziran","Temmuz","Ağustos","Eylül","Ekim","Kasım","Aralık"];
 const MONTHS_EN = ["January","February","March","April","May","June","July","August","September","October","November","December"];

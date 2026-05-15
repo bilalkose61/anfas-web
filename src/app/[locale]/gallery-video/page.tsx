@@ -2,7 +2,7 @@ import { getPublishedVideos } from "@/lib/actions/videoActions";
 import { Video } from "lucide-react";
 
 type Props = {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 };
 
 export default async function VideoGalleryPage({ params }: Props) {

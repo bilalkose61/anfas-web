@@ -1,7 +1,7 @@
 import { getPublishedCalendarEvents } from "@/lib/actions/calendarEventActions";
 import { Calendar } from "lucide-react";
 
-type Props = { params: { locale: string } };
+type Props = { params: Promise<{ locale: string }> };
 
 function formatDate(date: Date, locale: string) {
   return new Date(date).toLocaleDateString(locale === "tr" ? "tr-TR" : "en-GB", {

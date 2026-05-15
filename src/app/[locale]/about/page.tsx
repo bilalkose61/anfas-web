@@ -1,7 +1,7 @@
 import { Building2, Globe, Award, MapPin } from "lucide-react";
 
 type Props = {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 };
 
 export default async function AboutPage({ params }: Props) {

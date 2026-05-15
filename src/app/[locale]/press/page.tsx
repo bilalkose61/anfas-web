@@ -2,7 +2,7 @@ import { getPublishedPressNews } from "@/lib/actions/pressActions";
 import { Newspaper, Calendar, ExternalLink } from "lucide-react";
 
 type Props = {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 };
 
 export default async function PressPage({ params }: Props) {

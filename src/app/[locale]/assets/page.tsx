@@ -1,7 +1,7 @@
 import { Download, FileImage, FileType } from "lucide-react";
 
 type Props = {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 };
 
 const assets = [
