@@ -2,7 +2,7 @@ import { getPublishedTeamMembers } from "@/lib/actions/teamActions";
 import { Users } from "lucide-react";
 
 type Props = {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 };
 
 export default async function TeamPage({ params }: Props) {

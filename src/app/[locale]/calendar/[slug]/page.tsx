@@ -2,7 +2,7 @@ import { getFairBySlug } from "@/lib/actions/fairActions";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 
-type Props = { params: { locale: string; slug: string } };
+type Props = { params: Promise<{ locale: string; slug: string }> };
 
 const MONTHS_TR = ["Ocak","Şubat","Mart","Nisan","Mayıs","Haziran","Temmuz","Ağustos","Eylül","Ekim","Kasım","Aralık"];
 const MONTHS_EN = ["January","February","March","April","May","June","July","August","September","October","November","December"];
